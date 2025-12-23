@@ -5,20 +5,37 @@ import { MapPin, Zap, CreditCard, Settings, LogOut, Search } from 'lucide-react'
 
 const Home = () => {
   const navigate = useNavigate()
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})        // ← null se {} 
+  const [isLoading, setIsLoading] = useState(true)  // ← NEW
   const [showChargePoints, setShowChargePoints] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('user')
     if (stored) {
-      setUser(JSON.parse(stored))
+      const userData = JSON.parse(stored)
+      setUser(userData)
+      setIsLoading(false)  // ← IMMEDIATE loading false
     } else {
-      navigate('/', { replace: true }) // replace: true se history me login page nahi rahega
+      setIsLoading(false)
+      navigate('/', { replace: true })
     }
   }, [navigate])
 
-  if (!user) return <div className="flex items-center justify-center min-h-screen">Loading...</div>
+ if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 to-teal-50">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-green-200 border-t-green-500 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-lg font-semibold text-gray-700">Loading your dashboard...</p>
+        </div>
+      </div>
+    )
+  }
 
+if (!user?.isProfileComplete) {
+  navigate('/login', { replace: true })
+  return null  
+}
   // Mock charge points data
   const chargePoints = [
     { id: 1, name: 'Tata Power - Sector 62', distance: '1.2 km', status: 'available', power: '30kW', price: '₹15/kWh' },
@@ -27,11 +44,10 @@ const Home = () => {
     { id: 4, name: 'Zeon - Golf Course Road', distance: '5.6 km', status: 'available', power: '120kW', price: '₹20/kWh' },
   ]
 
-  const handleLogout = () => {
-    localStorage.removeItem('user')
-    navigate('/', { replace: true })
-    window.location.reload() // Force reload for clean state
-  }
+ const handleLogout = () => {
+ localStorage.removeItem('user')
+ navigate('/login')
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50">
