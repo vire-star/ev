@@ -1,17 +1,67 @@
-# React + Vite
+VERCEL URL = https://ev-phi-beryl.vercel.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+✅ Phone/Email OTP Login (1234 test OTP)
+✅ New User → Profile Setup (Name + Vehicle)
+✅ Existing User → Direct Dashboard  
+✅ User Dashboard with Name + Car Display
+✅ Find CPO → Nearby stations modal (4 stations)
+✅ Responsive design (Mobile + Desktop)
+✅ localStorage user state management
+✅ Smooth animations + gradients
+✅ Logout with clean redirect
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# ev" 
+Quick start
+
+# 1. Clone & Install
+git clone <your-repo>
+cd ev-charge-app
+npm install
+
+# 2. Run Development Server
+npm run dev
+
+# 3. Open http://localhost:5173
+
+
+Test flow
+
+1. Login → +91 9876543210 → OTP: 1234
+2. Profile Setup → Name + Tata Nexon EV
+3. Home → See "Tata Nexon EV • Your Name"
+4. Find CPO → See 4 nearby stations
+5. Logout → Clean login screen
+
+
+project structure
+
+
+src/
+├── components/
+│   └── LoginForm.jsx      # OTP Login UI
+├── pages/
+│   ├── Home.jsx          # Dashboard + CPO Modal
+│   └── ProfileSetup.jsx   # Onboarding form
+├── utils/
+│   └── validation.js      # Input validation
+└── App.jsx               # Router setup
+
+
+
+
+#Responsive breakpoints
+
+Mobile: grid-cols-2 (Cards)
+Tablet: grid-cols-3  
+Desktop: grid-cols-4 + max-w-6xl
+
+
+Environment variables
+
+
+No env vars needed (localStorage simulation)
+Production: Add VITE_API_URL for real backend
