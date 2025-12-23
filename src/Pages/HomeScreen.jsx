@@ -5,8 +5,8 @@ import { MapPin, Zap, CreditCard, Settings, LogOut, Search } from 'lucide-react'
 
 const Home = () => {
   const navigate = useNavigate()
-  const [user, setUser] = useState({})        // ← null se {} 
-  const [isLoading, setIsLoading] = useState(true)  // ← NEW
+  const [user, setUser] = useState({})        
+  const [isLoading, setIsLoading] = useState(true) 
   const [showChargePoints, setShowChargePoints] = useState(false)
 
   useEffect(() => {
@@ -14,10 +14,10 @@ const Home = () => {
     if (stored) {
       const userData = JSON.parse(stored)
       setUser(userData)
-      setIsLoading(false)  // ← IMMEDIATE loading false
+      setIsLoading(false)  
     } else {
       setIsLoading(false)
-      navigate('/', { replace: true })
+      navigate('/login', { replace: true })
     }
   }, [navigate])
 
